@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <ul class="nav nav-pills">
+                <li {{ app.request.get('_route') == 'main_page' ? 'active' }}>
+                    <a href="{{ path('main_page') }}" class="nav-link text-dark" aria-current="page">Главная</a>
+                </li>
+                <li {{ app.request.get('_route') == 'pizzaList' ? 'active' }}>
+                    <a href="{{ path('pizzaList') }}" class="nav-link text-dark" aria-current="page">Пиццы</a>
+                </li>
+                <li {{ app.request.get('_route') == 'drinkList' ? 'active' }}>
+                    <a href="{{ path('drinkList') }}" class="nav-link text-dark" aria-current="page">Напитки</a>
+                </li>
+                <li {{ app.request.get('_route') == 'rollList' ? 'active' }}>
+                    <a href="{{ path('rollList') }}" class="nav-link text-dark" aria-current="page">Роллы</a>
+                </li>
+                <li {{ app.request.get('_route') == 'kitList' ? 'active' }}>
+                    <a href="{{ path('kitList') }}" class="nav-link text-dark" aria-current="page">Корзина</a>
+                </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li {{ app.request.get('_route') == 'history' ? 'active' }}>
+                        <a href="{{ path('history') }}" class="nav-link text-dark" aria-current="page">Заказы</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="col-md-3 text-end">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('app_logout') }}">Выйти</a></button>
+                {% else %}
+                    <button type="button" class="btn btn-outline-primary me-2"><a href="{{ path('app_login') }}">Войти</a></button>
+                    <button type="button" class="btn btn-primary"><a class="text-light" href="{{ path('app_register') }}">Регистрация</a></button>
+                {% endif %}
+            </div>
+        </header>
+    </div>
+    <div class="container m-auto">
+        <h3>Регистрация</h3>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.login, {
+                label: 'Логин'
+            })}}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Пароль'
+            }) }}
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+
+        <div class="mt-lg-2">{{ form_end(registrationForm) }}</div>
+    </div>
+{% endblock %}

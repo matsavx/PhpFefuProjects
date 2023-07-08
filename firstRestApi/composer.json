@@ -1,0 +1,8 @@
+{
+    "require": {
+        "symfony/security-bundle": "^5.3"
+    },
+    "require-dev": {
+        "symfony/profiler-pack": "^1.0"
+    }
+}

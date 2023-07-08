@@ -1,0 +1,6 @@
+{
+    "name": "root/html",
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
